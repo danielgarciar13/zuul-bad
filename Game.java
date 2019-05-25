@@ -34,23 +34,25 @@ public class Game
      */
     private void createRooms()
     {
-        Room europa, africa, asia, oceania, america, antartida;
+        Room europa, africa, asia, oceania, americaNorte, americaSur, antartida;
 
         // create the rooms
         europa = new Room("You are in Europe");
         africa = new Room("You are in Africa");
         asia = new Room("You are in Asia");
         oceania = new Room("You are in Oceania");
-        america = new Room("You are in america");
+        americaNorte = new Room("You are in America Norte");
+        americaSur = new Room("You are in America Sur");
         antartida = new Room("You are in Antarctica");
 
         // initialise room exits
-        europa.setExits(null, asia, africa, america);
-        africa.setExits(europa, null, null, null);
-        asia.setExits(null, null, oceania, europa);
-        oceania.setExits(asia, null, null, null);
-        america.setExits(null, europa, antartida, null);
-        antartida.setExits(america, null, null, null);
+        europa.setExits(null, asia, africa, americaNorte, null);
+        africa.setExits(europa, null, null, americaSur, null);
+        asia.setExits(null, null, oceania, europa, null);
+        oceania.setExits(asia, null, null, null, null);
+        americaNorte.setExits(null, europa, americaSur, null, null);
+        americaSur.setExits(americaNorte, africa, null, null, antartida);
+        antartida.setExits(americaSur, null, null, null, null);
 
         currentRoom = europa;  // start game outside
     }
@@ -159,6 +161,9 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("south-east")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -183,6 +188,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("south-east ");
         }
         System.out.println();
     }
