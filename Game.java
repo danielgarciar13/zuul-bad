@@ -46,13 +46,13 @@ public class Game
         antartida = new Room("You are in Antarctica");
 
         // initialise room exits
-        europa.setExits(null, asia, africa, americaNorte, null);
-        africa.setExits(europa, null, null, americaSur, null);
-        asia.setExits(null, null, oceania, europa, null);
-        oceania.setExits(asia, null, null, null, null);
-        americaNorte.setExits(null, europa, americaSur, null, null);
-        americaSur.setExits(americaNorte, africa, null, null, antartida);
-        antartida.setExits(americaSur, null, null, null, null);
+        europa.setExits(null, asia, africa, americaNorte, null, null);
+        africa.setExits(europa, null, null, americaSur, null, null);
+        asia.setExits(null, null, oceania, europa, null, null);
+        oceania.setExits(asia, null, null, null, null, null);
+        americaNorte.setExits(null, europa, americaSur, null, null, null);
+        americaSur.setExits(americaNorte, africa, null, null, null, antartida);
+        antartida.setExits(null, null, null, null, americaSur, null);
 
         currentRoom = europa;  // start game outside
     }
