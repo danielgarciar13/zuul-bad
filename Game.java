@@ -37,13 +37,13 @@ public class Game
         Room europa, africa, asia, oceania, americaNorte, americaSur, antartida;
 
         // create the rooms
-        europa = new Room("You are in Europe");
-        africa = new Room("You are in Africa");
-        asia = new Room("You are in Asia");
-        oceania = new Room("You are in Oceania");
-        americaNorte = new Room("You are in America Norte");
-        americaSur = new Room("You are in America Sur");
-        antartida = new Room("You are in Antarctica");
+        europa = new Room("Europe");
+        africa = new Room("Africa");
+        asia = new Room("Asia");
+        oceania = new Room("Oceania");
+        americaNorte = new Room("America Norte");
+        americaSur = new Room("America Sur");
+        antartida = new Room("Antarctica");
 
         // initialise room exits
         europa.setExit("asia", asia);
@@ -96,7 +96,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
+        System.out.println("You are in " + currentRoom.getDescription());
         printLocationInfo();
     }
 
@@ -166,13 +166,13 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("You are " + currentRoom.getDescription());
+            System.out.println("You are in" + currentRoom.getDescription());
             printLocationInfo();
         }
     }
 
     private void printLocationInfo(){
-        System.out.println(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
     }
 
     /** 
