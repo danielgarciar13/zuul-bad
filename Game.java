@@ -65,6 +65,10 @@ public class Game
         antartida.setExit("america-sur", americaSur);
         antartida.setExit("oceania", oceania);
 
+        // initialise room item
+        europa.setItem("Paella", 4);
+        antartida.setItem("Foca", 150);
+
         currentRoom = europa;  // start game outside
     }
 
@@ -170,6 +174,7 @@ public class Game
         else {
             currentRoom = nextRoom;
             System.out.println("You are in" + currentRoom.getDescription());
+            System.out.println(currentRoom.getItem());
             printLocationInfo();
         }
     }
@@ -178,11 +183,11 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
 
-    private void look() {	
+    private void look() {   
         System.out.println(currentRoom.getLongDescription());
     }
 
-    private void eat() {	
+    private void eat() {    
         System.out.println("You have eaten now and you are not hungry any more");
     }
 

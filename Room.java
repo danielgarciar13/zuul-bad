@@ -18,6 +18,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> rooms;
+    private Item item;
 
     /**
      * Create a room described "description". Initially, it has
@@ -82,5 +83,17 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+    
+    public String getItem(){
+        String infoItem = "";
+        if(item != null){
+            infoItem = item.toString();
+        }
+        return infoItem;
+    }
+    
+    public void setItem(String description, int weigth){
+        item = new Item(description, weigth);
     }
 }
