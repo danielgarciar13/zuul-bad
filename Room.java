@@ -91,7 +91,7 @@ public class Room
         String infoItem = "";
         for(Item item : items){
             if(items != null){
-                infoItem += item.toString();
+                infoItem += item.toString() + "\n";
             }
         }
         return infoItem;

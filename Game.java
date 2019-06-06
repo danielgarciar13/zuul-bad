@@ -64,6 +64,12 @@ public class Game
         americaSur.setExit("antartida", antartida);
         antartida.setExit("america-sur", americaSur);
         antartida.setExit("oceania", oceania);
+        
+        // initialise room items
+        africa.addItem(new Item("Un boligrafo", 150));
+        africa.addItem(new Item("Un lapiz", 90));
+        oceania.addItem(new Item("Un canguro", 20));
+        oceania.addItem(new Item("Una goma", 100));
 
         currentRoom = europa;  // start game outside
     }
@@ -169,7 +175,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("You are in" + currentRoom.getDescription());
+            System.out.println("You are in " + currentRoom.getDescription());
             System.out.println(currentRoom.getItems());
             printLocationInfo();
         }
