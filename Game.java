@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -22,6 +23,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack lastRooms;
+    private ArrayList<Item> items;
 
     /**
      * Create the game and initialise its internal map.
@@ -31,6 +33,7 @@ public class Game
         createRooms();
         parser = new Parser();
         lastRooms = new Stack();
+        items = new ArrayList<>();
     }
 
     /**
@@ -68,12 +71,12 @@ public class Game
         americaSur.setExit("antartida", antartida);
         antartida.setExit("america-sur", americaSur);
         antartida.setExit("oceania", oceania);
-        
+
         // initialise room items
-        africa.addItem(new Item("Un boligrafo", 150));
-        africa.addItem(new Item("Un lapiz", 90));
-        oceania.addItem(new Item("Un canguro", 20));
-        oceania.addItem(new Item("Una goma", 100));
+        africa.addItem(new Item("Un boligrafo", 99));
+        africa.addItem(new Item("Un lapiz", 1));
+        oceania.addItem(new Item("Un canguro", 100));
+        oceania.addItem(new Item("Una goma", 1));
 
         currentRoom = europa;  // start game outside
     }
@@ -140,6 +143,15 @@ public class Game
         else if (commandWord.equals("back")) {
             back();
         }
+        else if (commandWord.equals("take")) {
+            take(command);
+        }
+        else if (commandWord.equals("drop")) {
+            drop(command);
+        }
+        else if (commandWord.equals("items")) {
+            getItems();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -200,13 +212,58 @@ public class Game
     private void eat() {    
         System.out.println("You have eaten now and you are not hungry any more");
     }
-    
+
     private void back() {    
         if(!lastRooms.empty()){
             currentRoom = (Room)lastRooms.pop();
             System.out.println("You are in " + currentRoom.getDescription());
             System.out.println(currentRoom.getItems());
             printLocationInfo();
+        }
+    }
+
+    private void take(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Elige la posicion del objeto");
+        }
+        else{
+            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null && pesoEnMochila() + currentRoom.getItem(Integer.parseInt(command.getSecondWord())).getWeigth() < 100){
+                items.add(currentRoom.getItem(Integer.parseInt(command.getSecondWord())));
+                currentRoom.dropItem(Integer.parseInt(command.getSecondWord()));
+            }
+            else if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null && pesoEnMochila() + currentRoom.getItem(Integer.parseInt(command.getSecondWord())).getWeigth() >= 100){
+                System.out.println("Demasiado peso");
+            }
+            getItems();
+        }
+    }
+
+    private int pesoEnMochila(){
+        int peso = 0;
+        for(int c = 0; c < items.size(); c++){
+            peso += items.get(c).getWeigth();
+        }
+        return peso;
+    }
+
+    private void drop(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Elige la posicion del objeto");
+        }
+        else{
+            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null){
+                currentRoom.addItem(items.get(Integer.parseInt(command.getSecondWord())));
+                items.remove(Integer.parseInt(command.getSecondWord()));
+                System.out.println(currentRoom.getItems());
+            }
+        }
+    }
+
+    private void getItems(){
+        for(int c = 0; c < items.size(); c++){
+            System.out.println(c + ": " + items.get(c).toString());;
         }
     }
 
