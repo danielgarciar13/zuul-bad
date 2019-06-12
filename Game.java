@@ -30,7 +30,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        player1 = new Player(firstRoom);
+        player1 = new Player(firstRoom, 100);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Game
         africa.addItem(new Item("Leon", 150, false));
         africa.addItem(new Item("Palos", 5, true));
         oceania.addItem(new Item("Canguro", 200, false));
-        oceania.addItem(new Item("Cubo de agua", 10, true));
+        oceania.addItem(new Item("Cubo de agua", 95, true));
 
         firstRoom = europa;  // start game outside
     }

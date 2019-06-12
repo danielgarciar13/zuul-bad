@@ -12,15 +12,17 @@ public class Player
     private Room currentRoom;
     private Stack lastRooms;
     private ArrayList<Item> items;
+    private int maximumWeight;
 
     /**
      * Constructor for objects of class Player
      */
-    public Player(Room firstRoom)
+    public Player(Room firstRoom, int maximumWeight)
     {
         currentRoom = firstRoom;
         lastRooms = new Stack();
         items = new ArrayList<>();
+        this.maximumWeight = maximumWeight;
     }
 
     /** 
@@ -73,7 +75,7 @@ public class Player
             System.out.println("Elige la posicion del objeto");
         }
         else{
-            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null && currentRoom.getItem(Integer.parseInt(command.getSecondWord())).takeable()){
+            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null && currentRoom.getItem(Integer.parseInt(command.getSecondWord())).takeable() && pesoEnMochila() + currentRoom.getItem(Integer.parseInt(command.getSecondWord())).getWeigth() < maximumWeight){
                 items.add(currentRoom.getItem(Integer.parseInt(command.getSecondWord())));
                 currentRoom.dropItem(Integer.parseInt(command.getSecondWord()));
             }
@@ -99,6 +101,14 @@ public class Player
         for(int c = 0; c < items.size(); c++){
             System.out.println(c + ": " + items.get(c).toString());;
         }
+    }
+
+    private int pesoEnMochila(){
+        int peso = 0;
+        for(int c = 0; c < items.size(); c++){
+            peso += items.get(c).getWeigth();
+        }
+        return peso;
     }
 
     public Room getCurrentRoom(){
