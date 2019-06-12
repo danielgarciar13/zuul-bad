@@ -143,6 +143,9 @@ public class Game
         else if (commandWord.equals("take")) {
             player1.take(command);
         }
+        else if (commandWord.equals("drop")) {
+            player1.drop(command);
+        }
         else if (commandWord.equals("items")) {
             player1.getItems();
         }
