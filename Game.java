@@ -30,7 +30,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        player1 = new Player(firstRoom);
+        player1 = new Player(firstRoom, 100);
     }
 
     /**
@@ -70,10 +70,10 @@ public class Game
         antartida.setExit("oceania", oceania);
         
         // initialise room items
-        africa.addItem(new Item("Un boligrafo", 150));
-        africa.addItem(new Item("Un lapiz", 90));
-        oceania.addItem(new Item("Un canguro", 20));
-        oceania.addItem(new Item("Una goma", 100));
+        africa.addItem(new Item("Leon", 150, false));
+        africa.addItem(new Item("Palos", 5, true));
+        oceania.addItem(new Item("Canguro", 200, false));
+        oceania.addItem(new Item("Cubo de agua", 95, true));
 
         firstRoom = europa;  // start game outside
     }
@@ -139,6 +139,15 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             player1.back();
+        }
+        else if (commandWord.equals("take")) {
+            player1.take(command);
+        }
+        else if (commandWord.equals("drop")) {
+            player1.drop(command);
+        }
+        else if (commandWord.equals("items")) {
+            player1.getItems();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
