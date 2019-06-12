@@ -70,10 +70,10 @@ public class Game
         antartida.setExit("oceania", oceania);
         
         // initialise room items
-        africa.addItem(new Item("Un boligrafo", 150));
-        africa.addItem(new Item("Un lapiz", 90));
-        oceania.addItem(new Item("Un canguro", 20));
-        oceania.addItem(new Item("Una goma", 100));
+        africa.addItem(new Item("Leon", 150, false));
+        africa.addItem(new Item("Palos", 5, true));
+        oceania.addItem(new Item("Canguro", 200, false));
+        oceania.addItem(new Item("Cubo de agua", 10, true));
 
         firstRoom = europa;  // start game outside
     }

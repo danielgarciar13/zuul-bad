@@ -73,11 +73,11 @@ public class Player
             System.out.println("Elige la posicion del objeto");
         }
         else{
-            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null){
+            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null && currentRoom.getItem(Integer.parseInt(command.getSecondWord())).takeable()){
                 items.add(currentRoom.getItem(Integer.parseInt(command.getSecondWord())));
                 currentRoom.dropItem(Integer.parseInt(command.getSecondWord()));
             }
-            //getItems();
+            getItems();
         }
     }
     
