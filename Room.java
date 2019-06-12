@@ -86,18 +86,28 @@ public class Room
     {
         return description;
     }
-    
+
     public String getItems(){
         String infoItem = "";
-        for(Item item : items){
-            if(items != null){
-                infoItem += item.toString() + "\n";
-            }
+        for(int c = 0; c < items.size(); c++){
+            infoItem += c + ": " + items.get(c).toString() + "\n";
         }
         return infoItem;
     }
-    
+
+    public Item getItem(int index){
+        Item item = null;
+        if(index <= items.size() - 1){
+            item = items.get(index);
+        }
+        return item;
+    }
+
     public void addItem(Item item){
         items.add(item);
+    }
+
+    public void dropItem(int index){
+        items.remove(index);
     }
 }

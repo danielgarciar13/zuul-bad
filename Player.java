@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 
 /**
  * Write a description of class Player here.
@@ -10,6 +11,7 @@ public class Player
 {
     private Room currentRoom;
     private Stack lastRooms;
+    private ArrayList<Item> items;
     
     /**
      * Constructor for objects of class Player
@@ -18,6 +20,7 @@ public class Player
     {
         currentRoom = firstRoom;
         lastRooms = new Stack();
+        items = new ArrayList<>();
     }
     
     /** 
@@ -61,6 +64,26 @@ public class Player
             currentRoom = (Room)lastRooms.pop();
             System.out.println("You are in " + currentRoom.getDescription());
             look();
+        }
+    }
+    
+    public void take(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Elige la posicion del objeto");
+        }
+        else{
+            if(currentRoom.getItem(Integer.parseInt(command.getSecondWord())) != null){
+                items.add(currentRoom.getItem(Integer.parseInt(command.getSecondWord())));
+                currentRoom.dropItem(Integer.parseInt(command.getSecondWord()));
+            }
+            //getItems();
+        }
+    }
+    
+    private void getItems(){
+        for(int c = 0; c < items.size(); c++){
+            System.out.println(c + ": " + items.get(c).toString());;
         }
     }
     
