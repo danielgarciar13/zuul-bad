@@ -81,7 +81,7 @@ public class Player
         }
     }
     
-    private void getItems(){
+    public void getItems(){
         for(int c = 0; c < items.size(); c++){
             System.out.println(c + ": " + items.get(c).toString());;
         }
