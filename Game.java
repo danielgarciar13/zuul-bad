@@ -74,6 +74,7 @@ public class Game
         africa.addItem(new Item("Palos", 5, true));
         oceania.addItem(new Item("Canguro", 200, false));
         oceania.addItem(new Item("Cubo de agua", 95, true));
+        europa.addItem(new Item ("Pocion", 10, true));
 
         firstRoom = europa;  // start game outside
     }
@@ -148,6 +149,9 @@ public class Game
         }
         else if (commandWord.equals("items")) {
             player1.getItems();
+        }
+        else if (commandWord.equals("drink")) {
+            player1.drink();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);

@@ -1,5 +1,6 @@
 import java.util.Stack;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Write a description of class Player here.
@@ -13,6 +14,7 @@ public class Player
     private Stack lastRooms;
     private ArrayList<Item> items;
     private int maximumWeight;
+    private Random aleatorio;
 
     /**
      * Constructor for objects of class Player
@@ -23,6 +25,7 @@ public class Player
         lastRooms = new Stack();
         items = new ArrayList<>();
         this.maximumWeight = maximumWeight;
+        aleatorio = new Random();
     }
 
     /** 
@@ -96,10 +99,25 @@ public class Player
             }
         }
     }
+    
+    public void drink(){
+        for(int c = 0; c < items.size(); c++){
+            if(items.get(c).getDescription().contains("Pocion")){
+                if(aleatorio.nextBoolean()){
+                    maximumWeight = pesoEnMochila() * 2;
+                    items.remove(c);
+                }
+                else{
+                    maximumWeight = pesoEnMochila() / 2;
+                    items.remove(c);
+                }
+            }
+        }
+    }
 
     public void getItems(){
         for(int c = 0; c < items.size(); c++){
-            System.out.println(c + ": " + items.get(c).toString());;
+            System.out.println(c + ": " + items.get(c).toString());
         }
     }
 
